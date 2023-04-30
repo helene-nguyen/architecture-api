@@ -1,0 +1,118 @@
+@hostname = localhost
+@entryPoint = http://{{hostname}}:{{$processEnv PORT}}/api/v1
+
+@accessToken = Authorization: Bearer 
+
+
+@refreshToken = Authorization: Bearer 
+
+
+#& -----------------------------------------------
+#~ ------------------------------------------ USER
+#& -----------------------------------------------
+
+#~ ------------------------ doSignUp
+###
+POST {{entryPoint}}/signup
+Content-Type: application/json
+
+{
+    "first_name": "Yumedo",
+    "last_name": "Yumedo",
+    "email": "yumelio.message@gmail.com",
+    "password": "N6y$Ozddzt=1aa",
+    "passwordConfirm": "N6y$Ozddzt=1aa"
+}
+
+#~ ------------------------ doSignIn
+###
+POST {{entryPoint}}/signin
+Content-Type: application/json
+
+{
+  "email": "yumedo@survivor.com",
+  "password": "N6y$Ozddzt=1aa"
+}
+
+#~ ------------------------ doSignOut
+###
+GET {{entryPoint}}/signout
+Content-Type: application/json
+{{refreshToken}}
+
+
+#^ ------------------------ fetchOneUser
+###
+GET {{entryPoint}}/users/12
+Content-Type: application/json
+{{accessToken}}
+
+
+#^ ------------------------ updateUser
+###
+PATCH {{entryPoint}}/users/12
+Content-Type: application/json
+{{accessToken}}
+
+{
+    "first_name": "Yumedooooeeee"
+}
+
+
+#^ ------------------------ deleteUser
+###
+DELETE {{entryPoint}}/users/11
+Content-Type: application/json
+{{accessToken}}
+
+#^ ------------------------ refreshToken
+###
+POST {{entryPoint}}/refreshToken
+Content-Type: application/json
+{{refreshToken}}
+
+#& -----------------------------------------------
+#~ --------------------------------------- ARTICLE
+#& -----------------------------------------------
+
+#^ ------------------------ createArticle
+###
+POST {{entryPoint}}/articles
+Content-Type: application/json
+{{accessToken}}
+
+{
+    "title": "Super article !",
+    "abstract": "Description de mon article",
+    "content": "Ceci est mon article"
+}
+
+#^ ------------------------ fetchAllArticles
+###
+GET {{entryPoint}}/users/12/articles
+Content-Type: application/json
+{{accessToken}}
+
+#^ ------------------------ fetchOneArticle
+###
+GET {{entryPoint}}/users/12/articles/14
+Content-Type: application/json
+{{accessToken}}
+
+#^ ------------------------ updateArticle
+###
+PATCH {{entryPoint}}/articles/12
+Content-Type: application/json
+{{accessToken}}
+
+{
+    "title": "Super article modifiééééééé !",
+    "abstract": "Description de mon article modifié",
+    "content": "Ceci est mon article modifié"
+}
+
+#^ ------------------------ deleteArticle
+###
+DELETE {{entryPoint}}/articles/13
+Content-Type: application/json
+{{accessToken}}
