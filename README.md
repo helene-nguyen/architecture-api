@@ -166,7 +166,33 @@ This is a configuration file for the TypeScript compiler (tsconfig.json) that sp
 ## Folder structure
 
 ```sh
-
+├── logs
+├── Makefile
+├── package.json
+├── README.md
+├── restClient.http
+├── scripts
+|  ├── create.sh
+|  └── delete.sh
+├── src
+|  ├── config
+|  |  ├── database
+|  |  └── options
+|  ├── domain
+|  |  ├── article
+|  |  ├── category
+|  |  ├── core
+|  |  ├── main
+|  |  └── user
+|  ├── index.ts
+|  ├── middlewares
+|  ├── resources
+|  |  ├── services
+|  |  ├── swaggerDocs
+|  |  └── utils
+|  └── Types
+|     └── express
+└── tsconfig.json
 ```
 
 ## Makefile Usage

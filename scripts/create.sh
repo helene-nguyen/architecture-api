@@ -1,9 +1,12 @@
 #!bin/bash
 
-mkdir ./src/domain/$COMPONENT_NAME_VARIABLE_SHELL
-touch ./src/domain/$COMPONENT_NAME_VARIABLE_SHELL/controller.ts
-touch ./src/domain/$COMPONENT_NAME_VARIABLE_SHELL/datamapper.ts
-touch ./src/domain/$COMPONENT_NAME_VARIABLE_SHELL/model.ts
-touch ./src/domain/$COMPONENT_NAME_VARIABLE_SHELL/router.ts
-touch ./src/domain/$COMPONENT_NAME_VARIABLE_SHELL/schema.ts
-touch ./src/domain/$COMPONENT_NAME_VARIABLE_SHELL/Types.ts
+read -p "Folder name: " FOLDER_NAME
+# COMPONENT_NAME_VARIABLE_SHELL=${FOLDER_NAME};
+
+mkdir ./src/domain/${FOLDER_NAME}
+touch ./src/domain/${FOLDER_NAME}/controller.ts
+touch ./src/domain/${FOLDER_NAME}/datamapper.ts
+touch ./src/domain/${FOLDER_NAME}/model.ts
+touch ./src/domain/${FOLDER_NAME}/router.ts
+touch ./src/domain/${FOLDER_NAME}/schema.ts
+touch ./src/domain/${FOLDER_NAME}/Types.ts

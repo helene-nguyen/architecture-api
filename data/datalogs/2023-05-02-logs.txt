@@ -1,0 +1,6 @@
+2023-05-02 Time_09:47:46 : Initialisation complete!
+2023-05-02 Time_09:55:17 : Creation of new version: v1
+2023-05-02 Time_09:56:13 : Creation of new version: v2
+2023-05-02 Time_09:56:44 : Removed version: v1
+2023-05-02 Time_09:56:54 : Removed version: v2
+2023-05-02 Time_09:56:59 : Creation of new version: v1
