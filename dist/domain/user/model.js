@@ -1,2 +1,10 @@
-"use strict";
+import debug from 'debug';
+const logger = debug('Controller');
+import { CoreModel } from '../core/coreModel.js';
+import { UserData } from './datamapper.js';
+class UserModel extends CoreModel {
+    data = UserData;
+}
+const User = new UserModel();
+export { User };
 //# sourceMappingURL=model.js.map

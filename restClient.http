@@ -1,5 +1,5 @@
 @hostname = localhost
-@entryPoint = http://{{hostname}}:{{$processEnv PORT}}/api/v1
+@entryPoint = http://{{hostname}}:4200/api/v1
 
 @accessToken = Authorization: Bearer 
 
@@ -40,6 +40,12 @@ GET {{entryPoint}}/signout
 Content-Type: application/json
 {{refreshToken}}
 
+
+#^ ------------------------ fetchAllUsers
+###
+GET {{entryPoint}}/users
+Content-Type: application/json
+{{accessToken}}
 
 #^ ------------------------ fetchOneUser
 ###

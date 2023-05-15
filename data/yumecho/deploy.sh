@@ -30,8 +30,8 @@ deploy_version() {
         elif [[ "${OS_NAME,,}" =~ (l*) ]]; then
             sudo -iu postgres \
                 psql \
-                -U postgres \
-                -d postgres \
+                -U ${PGUSER} \
+                -d ${PGDATABASE} \
                 -h ${PGHOST} \
                 -p ${PGPORT} \
                 -W \
