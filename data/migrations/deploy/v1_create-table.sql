@@ -27,7 +27,7 @@ CREATE DOMAIN PWD AS TEXT CHECK (
 CREATE TABLE IF NOT EXISTS "user" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "role_id" INTEGER NOT NULL DEFAULT 2,
-    "username" VARCHAR(50) NOT NULL,
+    "username" VARCHAR(50) NOT NULL UNIQUE,
     "first_name" VARCHAR(50),
     "last_name" VARCHAR(50),
     "avatar" TEXT,

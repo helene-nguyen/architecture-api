@@ -26,6 +26,7 @@ class CoreDataMapper {
       return result.rows;
     }
   };
+  
   //& SelectAll
   selectAll = async () => {
     if (this.client instanceof pg.Pool) {

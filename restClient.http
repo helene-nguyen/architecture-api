@@ -17,9 +17,8 @@ POST {{entryPoint}}/signup
 Content-Type: application/json
 
 {
-    "first_name": "Yumedo",
-    "last_name": "Yumedo",
-    "email": "yumelio.message@gmail.com",
+    "username": "YumedoOo",
+    "email": "yumeliooo.message@gmail.com",
     "password": "N6y$Ozddzt=1aa",
     "passwordConfirm": "N6y$Ozddzt=1aa"
 }
@@ -49,7 +48,7 @@ Content-Type: application/json
 
 #^ ------------------------ fetchOneUser
 ###
-GET {{entryPoint}}/users/12
+GET {{entryPoint}}/users/1
 Content-Type: application/json
 {{accessToken}}
 

@@ -4,21 +4,17 @@ read -p "Linux or Windows OS? (l/w) " OS_NAME
 read -p "Version number to deploy: " VERSION_NUMBER
 IS_ROOT="./data"
 
-find_file() {
-    find $1 -maxdepth 1 -name "*v${VERSION_NUMBER}*"
-}
-
 deploy_version() {
     for file in "./data/migrations/deploy/*.sql"; do
-
         if [[ "${OS_NAME,,}" =~ (w*) ]]; then
+
             psql \
                 -U ${PGUSER} \
                 -d ${PGDATABASE} \
                 -h ${PGHOST} \
                 -p ${PGPORT} \
                 -W \
-                -f $(find_file $file)
+                -f $(find $file -maxdepth 1 -name "v${VERSION_NUMBER}*")
 
         #   -U user to connect
         #   -d database name
@@ -35,7 +31,7 @@ deploy_version() {
                 -h ${PGHOST} \
                 -p ${PGPORT} \
                 -W \
-                -f $(find_file $file)
+                -f -f $(find $file -maxdepth 1 -name "v${VERSION_NUMBER}*")
         fi
     done
 

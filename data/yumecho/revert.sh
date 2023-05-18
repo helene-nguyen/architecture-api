@@ -18,7 +18,7 @@ revert_version() {
                 -h ${PGHOST} \
                 -p ${PGPORT} \
                 -W \
-                -f $(find_file $file)
+                -f $(find $file -maxdepth 1 -name "v${VERSION_NUMBER}*")
 
         elif [[ "${OS_NAME,,}" =~ (l*) ]]; then
             sudo -iu postgres \
@@ -28,7 +28,7 @@ revert_version() {
                 -h ${PGHOST} \
                 -p ${PGPORT} \
                 -W \
-                -f $(find_file $file)
+                -f $(find $file -maxdepth 1 -name "v${VERSION_NUMBER}*")
         fi
     done
 
