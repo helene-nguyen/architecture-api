@@ -15,6 +15,16 @@ class UserController extends CoreController {
                 logger(err.message);
         }
     };
+    doSignIn = async (req, res) => {
+        try {
+            const userIdentity = await User.controlSignIn(req, res);
+            return res.status(200).json(userIdentity);
+        }
+        catch (err) {
+            if (err instanceof Error)
+                logger(err.message);
+        }
+    };
     fetchAllUsers = async (req, res) => {
         try {
             const users = await User.controlAllUsersDetails();

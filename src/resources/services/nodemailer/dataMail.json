@@ -1,0 +1,11 @@
+{
+  "subscribe": {
+    "subject": "Hello you ✔",
+    "html": "<img src='https://res.cloudinary.com/dkizcn12a/image/upload/v1662580951/Fichier_29_pew5px.png'><br> <h2>You are now well subscribed !</h2><br><p></p>"
+  },
+
+  "unsubscribe": {
+    "subject": "Hello unsubscribe ✔",
+    "html": "<b>Hello unsubscribe !</b>"
+  }
+}

@@ -3,11 +3,14 @@ const logger = debug('Controller');
 import { CoreModel } from '../core/coreModel.js';
 import { ErrorApi } from '../../resources/services/errorHandling/errorHandler.js';
 import { UserData } from './datamapper.js';
+import { generateAccessToken, generateRefreshToken } from '../../resources/services/jsonWebToken.js';
+import { sendEmail } from '../../resources/services/nodemailer/nodemailerAuto.js';
 import bcrypt from 'bcrypt';
 class UserModel extends CoreModel {
     data = UserData;
     passwordErrorMsg = `Not the same password.`;
     userExist = `Username or email already exists.`;
+    userNotExist = `Username or email doesn't exist. Create an account to connect.`;
     controlSignUp = async (req, res) => {
         let { username, email, password, passwordConfirm } = req.body;
         const userExist = await this.checkUser(username, email);
@@ -18,9 +21,23 @@ class UserModel extends CoreModel {
         const salt = await bcrypt.genSalt(10);
         password = await bcrypt.hash(password, salt);
         req.body.password = password;
+        await sendEmail.toUser(email, 'subscribe');
         const result = await this.createOneItem(req.body);
         if (!result)
             return null;
+    };
+    controlSignIn = async (req, res) => {
+        let { email, password } = req.body;
+        const userExist = await this.checkUser('_', email);
+        if (!userExist)
+            throw new ErrorApi(req, res, 401, this.userNotExist);
+        const passwordValid = this.isPasswordValid(userExist, password);
+        if (!passwordValid)
+            throw new ErrorApi(req, res, 401, this.notValidMsg);
+        const { password: remove, ...user } = userExist;
+        const { accessToken, refreshToken } = this.generatedTokens({ user }, req);
+        const userIdentity = { ...user, accessToken, refreshToken };
+        return userIdentity;
     };
     controlAllUsersDetails = async () => {
         const users = await this.findAllItems();
@@ -40,8 +57,17 @@ class UserModel extends CoreModel {
             return null;
         return result;
     };
+    isPasswordValid = async (user, password) => {
+        const validPwd = await bcrypt.compare(password, user?.password);
+        return validPwd;
+    };
     removePassword = async (data, property) => {
         delete data[`${property}`];
+    };
+    generatedTokens = (userData, req) => {
+        let accessToken = generateAccessToken(userData);
+        let refreshToken = generateRefreshToken(userData, req);
+        return { accessToken, refreshToken };
     };
 }
 const User = new UserModel();

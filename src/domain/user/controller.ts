@@ -19,6 +19,17 @@ class UserController extends CoreController {
     }
   };
 
+  doSignIn = async (req: Request, res: Response) => {
+    try {
+      const userIdentity = await User.controlSignIn(req, res);
+  
+      //~ Result
+      return res.status(200).json(userIdentity);
+    } catch (err) {
+      if (err instanceof Error) logger(err.message);
+    }
+  };
+
   fetchAllUsers = async (req: Request, res: Response) => {
     try {
       const users = await User.controlAllUsersDetails();
@@ -28,8 +39,8 @@ class UserController extends CoreController {
       if (err instanceof Error) logger(err.message);
     }
   };
-  
-  fetchOneUser = async (req: Request, res: Response) => { 
+
+  fetchOneUser = async (req: Request, res: Response) => {
     try {
       const id = +req.params[this.paramsId];
 
@@ -39,8 +50,7 @@ class UserController extends CoreController {
     } catch (err) {
       if (err instanceof Error) logger(err.message);
     }
-
-  }
+  };
 }
 
 const user = new UserController();

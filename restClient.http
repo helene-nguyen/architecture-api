@@ -17,8 +17,8 @@ POST {{entryPoint}}/signup
 Content-Type: application/json
 
 {
-    "username": "YumedoOo",
-    "email": "yumeliooo.message@gmail.com",
+    "username": "YumedoOoO",
+    "email": "test@yumicode.net",
     "password": "N6y$Ozddzt=1aa",
     "passwordConfirm": "N6y$Ozddzt=1aa"
 }
@@ -29,7 +29,7 @@ POST {{entryPoint}}/signin
 Content-Type: application/json
 
 {
-  "email": "yumedo@survivor.com",
+  "email": "yumelio.message@gmail.com",
   "password": "N6y$Ozddzt=1aa"
 }
 

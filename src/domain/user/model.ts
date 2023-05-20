@@ -5,6 +5,8 @@ const logger = debug('Controller');
 import { CoreModel } from '../core/coreModel.js';
 import { ErrorApi } from '../../resources/services/errorHandling/errorHandler.js';
 import { UserData } from './datamapper.js';
+import { generateAccessToken, generateRefreshToken } from '../../resources/services/jsonWebToken.js';
+import { sendEmail } from '../../resources/services/nodemailer/nodemailerAuto.js';
 //~ Security
 import bcrypt from 'bcrypt';
 
@@ -18,11 +20,16 @@ interface IBodyData {
 interface IUserData {
   [key: string]: string;
 }
+
+interface IUserExist {
+  password: string;
+}
 class UserModel extends CoreModel {
   //& Properties
   data = UserData;
   passwordErrorMsg: string = `Not the same password.`;
   userExist: string = `Username or email already exists.`;
+  userNotExist: string = `Username or email doesn't exist. Create an account to connect.`;
 
   //& Methods
   controlSignUp = async (req: Request, res: Response) => {
@@ -40,11 +47,31 @@ class UserModel extends CoreModel {
     //replace password in body
     req.body.password = password;
 
-    // //~ Send an email to confirm creation
-    // await sendEmail.toUser(email, 'subscribe');
+    //~ Send an email to confirm creation
+    await sendEmail.toUser(email, 'subscribe');
 
     const result = await this.createOneItem(req.body);
     if (!result) return null;
+  };
+
+  controlSignIn = async (req: Request, res: Response) => {
+    let { email, password } = req.body;
+
+    const userExist: IUserExist | null = await this.checkUser('_', email);
+    if (!userExist) throw new ErrorApi(req, res, 401, this.userNotExist);
+
+    //~ Security
+    const passwordValid = this.isPasswordValid(userExist, password);
+    if (!passwordValid) throw new ErrorApi(req, res, 401, this.notValidMsg);
+
+    const { password: remove, ...user } = userExist!;
+    // console.log('user:', user);
+    // The ! non-null assertion operator is used to tell TypeScript that userExist is guaranteed to be non-null at this point, so the destructuring assignment will work correctly
+    const { accessToken, refreshToken } = this.generatedTokens({ user }, req);
+
+    const userIdentity = { ...user, accessToken, refreshToken };
+
+    return userIdentity;
   };
 
   controlAllUsersDetails = async () => {
@@ -68,15 +95,27 @@ class UserModel extends CoreModel {
   };
 
   //& Services Methods
-  checkUser = async (username: string, email: string): Promise<void | null> => {
+  checkUser = async (username: string, email: string): Promise<IUserExist | null> => {
     const result = await UserData.findUserIdentity(username, email);
     if (!result) return null;
 
     return result;
   };
 
+  isPasswordValid = async (user: IUserExist | null, password: string): Promise<boolean | null> => {
+    const validPwd = await bcrypt.compare(password, user?.password!);
+    return validPwd;
+  };
+
   removePassword = async (data: IUserData, property: string) => {
     delete data[`${property}`];
+  };
+
+  generatedTokens = (userData: Object, req: Request) => {
+    //~ Authorization JWT
+    let accessToken = generateAccessToken(userData);
+    let refreshToken = generateRefreshToken(userData, req);
+    return { accessToken, refreshToken };
   };
 }
 

@@ -14,7 +14,6 @@ class UserDataMapper extends CoreDataMapper {
                 `,
                 values: [username, email],
             };
-            console.log('result: DATAMAPPER');
             const result = await this.client.query(preparedQuery);
             return result.rows[0];
         }
