@@ -18,9 +18,9 @@ transporter.verify(function (error, success) {
         logger('\x1b[1;34m📧 Server is ready to take our messages.\x1b[0m');
     }
 });
-const typedDataMailer = dataMailer;
 const sendEmail = {
     toUser(email, context) {
+        const typedDataMailer = dataMailer;
         return transporter.sendMail({
             from: `"Yumedo 🌿" <"${process.env.USER_MAILER}">`,
             to: `${email}`,

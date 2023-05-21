@@ -33,24 +33,13 @@ class UserModel extends CoreModel {
 
   //& Methods
   controlSignUp = async (req: Request, res: Response) => {
-    let { username, email, password, passwordConfirm }: IBodyData = req.body;
-
-    //~ Email already exist ?
-    const userExist = await this.checkUser(username, email);
-    if (userExist) throw new ErrorApi(req, res, 401, this.userExist);
-
-    //~ Encrypt password if password exist
-    if (password !== passwordConfirm) throw new ErrorApi(req, res, 401, this.passwordErrorMsg);
-
-    const salt = await bcrypt.genSalt(10);
-    password = await bcrypt.hash(password, salt);
-    //replace password in body
-    req.body.password = password;
+    //~ Control user details
+    const user = await this.controlUserDetails(req, res);
 
     //~ Send an email to confirm creation
-    await sendEmail.toUser(email, 'subscribe');
+    await sendEmail.toUser(user.email, 'subscribe');
 
-    const result = await this.createOneItem(req.body);
+    const result = await this.createOneItem(user);
     if (!result) return null;
   };
 
@@ -74,7 +63,7 @@ class UserModel extends CoreModel {
     return userIdentity;
   };
 
-  controlAllUsersDetails = async () => {
+  controlAllUsersRemovePwd = async () => {
     const users = await this.findAllItems();
 
     //~ Delete password display
@@ -85,13 +74,31 @@ class UserModel extends CoreModel {
     return users;
   };
 
-  controlUserDetails = async (id: number) => {
+  controlUserRemovePwd = async (id: number) => {
     const user = await this.findOneItem(id);
 
     //~ Delete password display
     this.removePassword(user, 'password');
 
     return user;
+  };
+
+  controlUserDetails = async (req: Request, res: Response) => {
+    let { username, email, password, passwordConfirm }: IBodyData = req.body;
+
+    //~ Email already exist ?
+    const userExist = await this.checkUser(username, email);
+    if (userExist) throw new ErrorApi(req, res, 401, this.userExist);
+
+    //~ Encrypt password if password exist
+    if (password !== passwordConfirm) throw new ErrorApi(req, res, 401, this.passwordErrorMsg);
+
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+    //replace password in body
+    req.body.password = password;
+
+    return req.body;
   };
 
   //& Services Methods

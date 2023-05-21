@@ -1,13 +1,10 @@
-//~ Dotenv
+//~ Import modules
 import 'dotenv/config';
-
-//~ Import Debug
 import debug from 'debug';
 const logger = debug('NodeMailer');
-
-//~ Node Mailer
 import nodemailer from 'nodemailer';
 import dataMailer from './dataMail.json' assert { type: 'json' };
+
 
 //~ TRANSPORTER
 //& Config transporter "Hostinger"
@@ -28,20 +25,12 @@ transporter.verify(function (error, success) {
   }
 });
 
-interface IDataMailer {
-  [key: string]: {
-    subject: string;
-    html: string;
-    // text: string;
-  };
-}
-
-const typedDataMailer: IDataMailer = dataMailer;
-
 //~ EMAIL CONTENT
 //& Config content email
 const sendEmail = {
   toUser(email: string, context: string) {
+    const typedDataMailer: IDataMailer = dataMailer;
+
     return transporter.sendMail({
       from: `"Yumedo 🌿" <"${process.env.USER_MAILER}">`, // sender address
       to: `${email}`, // list of receivers

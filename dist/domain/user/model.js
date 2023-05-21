@@ -12,17 +12,9 @@ class UserModel extends CoreModel {
     userExist = `Username or email already exists.`;
     userNotExist = `Username or email doesn't exist. Create an account to connect.`;
     controlSignUp = async (req, res) => {
-        let { username, email, password, passwordConfirm } = req.body;
-        const userExist = await this.checkUser(username, email);
-        if (userExist)
-            throw new ErrorApi(req, res, 401, this.userExist);
-        if (password !== passwordConfirm)
-            throw new ErrorApi(req, res, 401, this.passwordErrorMsg);
-        const salt = await bcrypt.genSalt(10);
-        password = await bcrypt.hash(password, salt);
-        req.body.password = password;
-        await sendEmail.toUser(email, 'subscribe');
-        const result = await this.createOneItem(req.body);
+        const user = await this.controlUserDetails(req, res);
+        await sendEmail.toUser(user.email, 'subscribe');
+        const result = await this.createOneItem(user);
         if (!result)
             return null;
     };
@@ -39,17 +31,29 @@ class UserModel extends CoreModel {
         const userIdentity = { ...user, accessToken, refreshToken };
         return userIdentity;
     };
-    controlAllUsersDetails = async () => {
+    controlAllUsersRemovePwd = async () => {
         const users = await this.findAllItems();
         for (const user of users) {
             this.removePassword(user, 'password');
         }
         return users;
     };
-    controlUserDetails = async (id) => {
+    controlUserRemovePwd = async (id) => {
         const user = await this.findOneItem(id);
         this.removePassword(user, 'password');
         return user;
+    };
+    controlUserDetails = async (req, res) => {
+        let { username, email, password, passwordConfirm } = req.body;
+        const userExist = await this.checkUser(username, email);
+        if (userExist)
+            throw new ErrorApi(req, res, 401, this.userExist);
+        if (password !== passwordConfirm)
+            throw new ErrorApi(req, res, 401, this.passwordErrorMsg);
+        const salt = await bcrypt.genSalt(10);
+        password = await bcrypt.hash(password, salt);
+        req.body.password = password;
+        return req.body;
     };
     checkUser = async (username, email) => {
         const result = await UserData.findUserIdentity(username, email);

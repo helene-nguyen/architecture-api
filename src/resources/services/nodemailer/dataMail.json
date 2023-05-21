@@ -7,5 +7,10 @@
   "unsubscribe": {
     "subject": "Hello unsubscribe ✔",
     "html": "<b>Hello unsubscribe !</b>"
+  },
+
+  "updated": {
+    "subject": "Hello updated ✔",
+    "html": "<b>Hello updated !</b>"
   }
 }

@@ -17,8 +17,8 @@ POST {{entryPoint}}/signup
 Content-Type: application/json
 
 {
-    "username": "YumedoOoO",
-    "email": "test@yumicode.net",
+    "username": "Yumi",
+    "email": "contact@yumicode.net",
     "password": "N6y$Ozddzt=1aa",
     "passwordConfirm": "N6y$Ozddzt=1aa"
 }

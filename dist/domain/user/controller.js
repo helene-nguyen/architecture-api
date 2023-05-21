@@ -25,9 +25,10 @@ class UserController extends CoreController {
                 logger(err.message);
         }
     };
+    doSignOut = async (req, res) => { };
     fetchAllUsers = async (req, res) => {
         try {
-            const users = await User.controlAllUsersDetails();
+            const users = await User.controlAllUsersRemovePwd();
             return res.status(200).json(users);
         }
         catch (err) {
@@ -38,7 +39,7 @@ class UserController extends CoreController {
     fetchOneUser = async (req, res) => {
         try {
             const id = +req.params[this.paramsId];
-            const user = await User.controlUserDetails(id);
+            const user = await User.controlUserRemovePwd(id);
             return res.status(200).json(user);
         }
         catch (err) {
@@ -46,6 +47,8 @@ class UserController extends CoreController {
                 logger(err.message);
         }
     };
+    updateUser = async (req, res) => { };
+    deleteUser = async (req, res) => { };
 }
 const user = new UserController();
 export { user };
