@@ -1,0 +1,4 @@
+BEGIN;
+
+DROP FUNCTION update_user;
+COMMIT;

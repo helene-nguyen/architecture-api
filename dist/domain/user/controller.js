@@ -8,7 +8,7 @@ class UserController extends CoreController {
     doSignUp = async (req, res) => {
         try {
             await User.controlSignUp(req, res);
-            return res.status(201).json(this.createSuccessful);
+            return res.status(201).json({ state: this.createSuccessful });
         }
         catch (err) {
             if (err instanceof Error)
@@ -47,7 +47,17 @@ class UserController extends CoreController {
                 logger(err.message);
         }
     };
-    updateUser = async (req, res) => { };
+    updateUser = async (req, res) => {
+        try {
+            const id = +req.params[this.paramsId];
+            await User.controlUpdatedUserDetails(req, res, id);
+            return res.status(200).json({ state: this.updateSuccessful });
+        }
+        catch (err) {
+            if (err instanceof Error)
+                logger(err.message);
+        }
+    };
     deleteUser = async (req, res) => { };
 }
 const user = new UserController();

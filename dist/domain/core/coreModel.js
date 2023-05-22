@@ -22,6 +22,12 @@ class CoreModel {
             return null;
         return result;
     };
+    updateOneItem = async (bodyData) => {
+        const result = await this.data.update(bodyData);
+        if (!result)
+            return null;
+        return result;
+    };
 }
 export { CoreModel };
 //# sourceMappingURL=coreModel.js.map

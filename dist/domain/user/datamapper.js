@@ -5,6 +5,7 @@ class UserDataMapper extends CoreDataMapper {
     tableName = 'user';
     columns = ` "id", "role_id", "username", "first_name", "last_name", "avatar", "email", "password"`;
     createFunctionName = 'create_user';
+    updateFunctionName = 'update_user';
     userIdentity = 'user_identity';
     findUserIdentity = async (username, email) => {
         if (this.client instanceof pg.Pool) {

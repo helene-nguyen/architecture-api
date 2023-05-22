@@ -8,6 +8,7 @@ interface CoreController {
     findAllItems: Function;
     findOneItem: Function;
     createOneItem: Function;
+    updateOneItem: Function;
   };
 
   paramsId: string;
@@ -54,7 +55,16 @@ class CoreController {
   };
 
   //& Update
-  update = async () => {};
+  update = async (req: Request, res: Response) => {
+    try {
+      const bodyData = req.body;
+      await this.model.updateOneItem(bodyData);
+
+      return res.status(200).json(this.updateSuccessful);
+    } catch (err) {
+      if (err instanceof Error) logger(err.message);
+    }
+  };
 
   //& Delete
   delete = async (id: number | undefined) => {};

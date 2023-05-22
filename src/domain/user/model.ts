@@ -1,12 +1,12 @@
 //~ Import modules
 import { Request, Response } from 'express';
 import debug from 'debug';
-const logger = debug('Controller');
+const logger = debug('Model');
 import { CoreModel } from '../core/coreModel.js';
 import { ErrorApi } from '../../resources/services/errorHandling/errorHandler.js';
 import { UserData } from './datamapper.js';
-import { generateAccessToken, generateRefreshToken } from '../../resources/services/jsonWebToken.js';
 import { sendEmail } from '../../resources/services/nodemailer/nodemailerAuto.js';
+import { generateAccessToken, generateRefreshToken } from '../../resources/services/jsonWebToken.js';
 //~ Security
 import bcrypt from 'bcrypt';
 
@@ -36,11 +36,12 @@ class UserModel extends CoreModel {
     //~ Control user details
     const user = await this.controlUserDetails(req, res);
 
-    //~ Send an email to confirm creation
-    await sendEmail.toUser(user.email, 'subscribe');
+    await this.createOneItem(user);
 
-    const result = await this.createOneItem(user);
-    if (!result) return null;
+    //~ Send an email to confirm creation
+    this.handleEmail(user.email, 'subscribe');
+
+    return;
   };
 
   controlSignIn = async (req: Request, res: Response) => {
@@ -54,13 +55,30 @@ class UserModel extends CoreModel {
     if (!passwordValid) throw new ErrorApi(req, res, 401, this.notValidMsg);
 
     const { password: remove, ...user } = userExist!;
-    // console.log('user:', user);
+
     // The ! non-null assertion operator is used to tell TypeScript that userExist is guaranteed to be non-null at this point, so the destructuring assignment will work correctly
     const { accessToken, refreshToken } = this.generatedTokens({ user }, req);
 
     const userIdentity = { ...user, accessToken, refreshToken };
 
     return userIdentity;
+  };
+
+  controlUpdatedUserDetails = async (req: Request, res: Response, userId: number) => {
+    let userData = await this.controlUserDetails(req, res);
+    const user = await this.findOneItem(userId);
+    // uncomment when session active
+    // if (!user || req.user?.id !== userId) throw new ErrorApi(req, res, 401, this.notValidMsg);
+
+    //~ Update user
+    userData = { id: user.id, ...userData };
+
+    await this.updateOneItem(userData);
+
+    //~ Send an email to confirm updates
+    this.handleEmail(user.email, 'updated');
+
+    return;
   };
 
   controlAllUsersRemovePwd = async () => {
@@ -74,8 +92,8 @@ class UserModel extends CoreModel {
     return users;
   };
 
-  controlUserRemovePwd = async (id: number) => {
-    const user = await this.findOneItem(id);
+  controlUserRemovePwd = async (userId: number) => {
+    const user = await this.findOneItem(userId);
 
     //~ Delete password display
     this.removePassword(user, 'password');
@@ -91,12 +109,14 @@ class UserModel extends CoreModel {
     if (userExist) throw new ErrorApi(req, res, 401, this.userExist);
 
     //~ Encrypt password if password exist
-    if (password !== passwordConfirm) throw new ErrorApi(req, res, 401, this.passwordErrorMsg);
+    if (password) {
+      if (password !== passwordConfirm) throw new ErrorApi(req, res, 401, this.passwordErrorMsg);
 
-    const salt = await bcrypt.genSalt(10);
-    password = await bcrypt.hash(password, salt);
-    //replace password in body
-    req.body.password = password;
+      const salt = await bcrypt.genSalt(10);
+      password = await bcrypt.hash(password, salt);
+      //replace password in body
+      req.body.password = password;
+    }
 
     return req.body;
   };
@@ -123,6 +143,10 @@ class UserModel extends CoreModel {
     let accessToken = generateAccessToken(userData);
     let refreshToken = generateRefreshToken(userData, req);
     return { accessToken, refreshToken };
+  };
+
+  handleEmail = (email: string, context: string) => {
+    return sendEmail.toUser(email, context);
   };
 }
 

@@ -7,6 +7,7 @@ interface CoreModel {
     insert: Function;
     selectAll: Function;
     selectOne: Function;
+    update: Function;
   };
 }
 class CoreModel {
@@ -37,6 +38,13 @@ class CoreModel {
 
     return result;
   };
+
+  updateOneItem = async (bodyData: Object) => {
+    const result = await this.data.update(bodyData);
+    if (!result) return null;
+
+    return result;
+  }
 
   //! Check methods
 }

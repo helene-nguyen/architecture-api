@@ -17,8 +17,8 @@ POST {{entryPoint}}/signup
 Content-Type: application/json
 
 {
-    "username": "Yumi",
-    "email": "contact@yumicode.net",
+    "username": "Yumicode",
+    "email": "helene.dyn.nguyen@gmail.com",
     "password": "N6y$Ozddzt=1aa",
     "passwordConfirm": "N6y$Ozddzt=1aa"
 }
@@ -48,19 +48,19 @@ Content-Type: application/json
 
 #^ ------------------------ fetchOneUser
 ###
-GET {{entryPoint}}/users/1
+GET {{entryPoint}}/users/3
 Content-Type: application/json
 {{accessToken}}
 
 
 #^ ------------------------ updateUser
 ###
-PATCH {{entryPoint}}/users/12
+PATCH {{entryPoint}}/users/3
 Content-Type: application/json
 {{accessToken}}
 
 {
-    "first_name": "Yumedooooeeee"
+    "first_name": "Yumedo"
 }
 
 

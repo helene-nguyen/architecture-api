@@ -22,10 +22,12 @@ Hope it can help :)
 ## Tools and versions
 
 - OS
+
   - Linux OS -
   - Windows OS -
 
 - IDE
+
   - VSCodium v1.77.3
 
 - NodeJS v20.0.0
@@ -128,9 +130,7 @@ Add Typescript configuration file:
     "removeComments": true,
     "resolveJsonModule": true
   },
-  "lib": [
-    "es2015"
-  ],
+  "lib": ["es2015"],
   "compileOnSave": true
 }
 ```
@@ -196,6 +196,54 @@ This is a configuration file for the TypeScript compiler (tsconfig.json) that sp
 ```
 
 ## Makefile Usage
+
+### Use for domains
+
+```sh
+create_domain
+```
+
+```sh
+delete_domain
+```
+
+### Use of Yumecho (database versioning)
+
+- Initialized a new database
+
+```sh
+db_init
+```
+
+- Add a new version
+
+```sh
+db_add
+```
+
+- Remove a version
+
+```sh
+db_remove
+```
+
+- Deploy a version
+
+```sh
+db_deploy
+```
+
+- Revert the action of a specific version
+
+```sh
+db_revert
+```
+
+- Check if the version is well deployed
+
+```sh
+db_verify
+```
 
 ## Project
 

@@ -4,11 +4,11 @@ const logger = debug('NodeMailer');
 import nodemailer from 'nodemailer';
 import dataMailer from './dataMail.json' assert { type: 'json' };
 const transporter = nodemailer.createTransport({
-    host: 'smtp.hostinger.com',
+    host: 'smtp.gmail.com',
     auth: {
         user: process.env.USER_MAILER,
         pass: process.env.PASSWORD_MAILER,
-    },
+    }
 });
 transporter.verify(function (error, success) {
     if (error) {
@@ -19,13 +19,19 @@ transporter.verify(function (error, success) {
     }
 });
 const sendEmail = {
-    toUser(email, context) {
+    toUser: (email, context) => {
         const typedDataMailer = dataMailer;
         return transporter.sendMail({
             from: `"Yumedo 🌿" <"${process.env.USER_MAILER}">`,
             to: `${email}`,
             subject: typedDataMailer[context].subject,
             html: typedDataMailer[context].html,
+        }, (err) => {
+            if (err) {
+                return logger('❌ Error while sending email: ' + err);
+            }
+            else
+                return logger('✅ Email sent successfully');
         });
     },
 };

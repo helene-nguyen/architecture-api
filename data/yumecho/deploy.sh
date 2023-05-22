@@ -7,7 +7,7 @@ IS_ROOT="./data"
 deploy_version() {
     for file in "./data/migrations/deploy/*.sql"; do
         if [[ "${OS_NAME,,}" =~ (w*) ]]; then
-
+        
             psql \
                 -U ${PGUSER} \
                 -d ${PGDATABASE} \

@@ -13,7 +13,7 @@ class UserController extends CoreController {
     try {
       await User.controlSignUp(req, res);
       //~ Result
-      return res.status(201).json(this.createSuccessful);
+      return res.status(201).json({ state: this.createSuccessful });
     } catch (err) {
       if (err instanceof Error) logger(err.message);
     }
@@ -22,7 +22,7 @@ class UserController extends CoreController {
   doSignIn = async (req: Request, res: Response) => {
     try {
       const userIdentity = await User.controlSignIn(req, res);
-  
+
       //~ Result
       return res.status(200).json(userIdentity);
     } catch (err) {
@@ -30,7 +30,7 @@ class UserController extends CoreController {
     }
   };
 
-  doSignOut = async (req: Request, res: Response) => { }
+  doSignOut = async (req: Request, res: Response) => {};
 
   fetchAllUsers = async (req: Request, res: Response) => {
     try {
@@ -54,9 +54,19 @@ class UserController extends CoreController {
     }
   };
 
-  updateUser = async (req: Request, res: Response) => { }
+  updateUser = async (req: Request, res: Response) => {
+    try {
+      const id = +req.params[this.paramsId];
+      await User.controlUpdatedUserDetails(req, res, id);
 
-  deleteUser = async (req: Request, res: Response) => { }
+      //~ Result
+      return res.status(200).json({ state: this.updateSuccessful });
+    } catch (err) {
+      if (err instanceof Error) logger(err.message);
+    }
+  };
+
+  deleteUser = async (req: Request, res: Response) => {};
 }
 
 const user = new UserController();
