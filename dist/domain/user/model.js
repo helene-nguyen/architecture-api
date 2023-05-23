@@ -33,6 +33,8 @@ class UserModel extends CoreModel {
     controlUpdatedUserDetails = async (req, res, userId) => {
         let userData = await this.controlUserDetails(req, res);
         const user = await this.findOneItem(userId);
+        if (!user || req.user?.id !== userId)
+            throw new ErrorApi(req, res, 401, this.notValidMsg);
         userData = { id: user.id, ...userData };
         await this.updateOneItem(userData);
         this.handleEmail(user.email, 'updated');

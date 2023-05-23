@@ -69,8 +69,8 @@ class UserModel extends CoreModel {
   controlUpdatedUserDetails = async (req: Request, res: Response, userId: number) => {
     let userData = await this.controlUserDetails(req, res);
     const user = await this.findOneItem(userId);
-    // uncomment when session active
-    // if (!user || req.user?.id !== userId) throw new ErrorApi(req, res, 401, this.notValidMsg);
+
+    if (!user || req.user?.id !== userId) throw new ErrorApi(req, res, 401, this.notValidMsg);
 
     //~ Update user
     userData = { id: user.id, ...userData };

@@ -1,10 +1,10 @@
 @hostname = localhost
 @entryPoint = http://{{hostname}}:4200/api/v1
 
-@accessToken = Authorization: Bearer 
+@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6Ill1bWkiLCJlbWFpbCI6ImNvbnRhY3RAeXVtaWNvZGUubmV0Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY4NDgzNTcyOCwiZXhwIjoxNjg0OTIyMTI4fQ.2RXiEVdcWZdII1wF32wHJAC_g0m781fQU2WqzYTZ9Nw
 
 
-@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2LCJ1c2VybmFtZSI6Ill1bWlpIiwiZW1haWwiOiJ0ZXN0QHl1bWljb2RlLm5ldCIsInJvbGUiOiJ1c2VyIn0sImlhdCI6MTY4NDgyODA3NCwiZXhwIjoxNjg1MDAwODc0fQ.s-4YX5tGUPjQGbnhL9Hq-xIfrR4OdyFsJBe83E6nkbU
+@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6Ill1bWkiLCJlbWFpbCI6ImNvbnRhY3RAeXVtaWNvZGUubmV0Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY4NDgzNTcyOCwiZXhwIjoxNjg1MDA4NTI4fQ.Oxvmt_Uy5V_4nqsnr4f3AK10PywO8Q57cOsFijIvqmc
 
 
 #& -----------------------------------------------
@@ -29,7 +29,7 @@ POST {{entryPoint}}/signin
 Content-Type: application/json
 
 {
-  "email": "test@yumicode.net",
+  "email": "contact@yumicode.net",
   "password": "N6y$Ozddzt=1aa"
 }
 
@@ -55,7 +55,7 @@ Content-Type: application/json
 
 #^ ------------------------ updateUser
 ###
-PATCH {{entryPoint}}/users/3
+PATCH {{entryPoint}}/users/4
 Content-Type: application/json
 {{accessToken}}
 
