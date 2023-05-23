@@ -3,6 +3,7 @@ const logger = debug('Controller');
 class CoreController {
     createSuccessful = `Successfully created!`;
     updateSuccessful = 'Informations successfully updated!';
+    deleteSuccessful = 'Informations successfully deleted!';
     create = async (req, res) => {
         try {
             const bodyData = req.body;
@@ -46,7 +47,17 @@ class CoreController {
                 logger(err.message);
         }
     };
-    delete = async (id) => { };
+    delete = async (req, res) => {
+        try {
+            const id = +req.params[this.paramsId];
+            await this.model.deleteOneItem(id);
+            return res.status(200).json(this.deleteSuccessful);
+        }
+        catch (err) {
+            if (err instanceof Error)
+                logger(err.message);
+        }
+    };
 }
 export { CoreController };
 //# sourceMappingURL=coreController.js.map

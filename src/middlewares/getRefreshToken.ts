@@ -1,14 +1,12 @@
-//~ Import Debug
+//~ Import modules
+import jwt from 'jsonwebtoken';
 import debug from 'debug';
 const logger = debug('Jwt');
-
-//~ Import
 import { Request, Response, NextFunction } from 'express';
 import { ErrorApi } from '../resources/services/errorHandling/errorHandler.js';
-import jwt from 'jsonwebtoken';
 
 //~ Get refresh token
-function getRefreshToken(req: Request, res: Response, next: NextFunction) {
+const getRefreshToken = (req: Request, res: Response, next: NextFunction) => {
   try {
     //get token from header
     const authHeader = req.headers['authorization'];

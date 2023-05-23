@@ -36,6 +36,7 @@ class UserModel extends CoreModel {
     //~ Control user details
     const user = await this.controlUserDetails(req, res);
 
+    //~ Create user
     await this.createOneItem(user);
 
     //~ Send an email to confirm creation
@@ -47,6 +48,7 @@ class UserModel extends CoreModel {
   controlSignIn = async (req: Request, res: Response) => {
     let { email, password } = req.body;
 
+    //~ User exist?
     const userExist: IUserExist | null = await this.checkUser('_', email);
     if (!userExist) throw new ErrorApi(req, res, 401, this.userNotExist);
 
@@ -77,6 +79,24 @@ class UserModel extends CoreModel {
 
     //~ Send an email to confirm updates
     this.handleEmail(user.email, 'updated');
+
+    return;
+  };
+
+  controlDeletedUserDetails = async (req: Request, res: Response, userId: number) => {
+    const user = await this.findOneItem(userId);
+    // User must be connected to delete account
+    if (req.user?.role === 'admin' || req.user?.id !== userId) throw new ErrorApi(req, res, 403, this.badRequestMsg);
+
+    //~ Delete user
+    await this.deleteOneItem(user.id);
+
+    //~ Clean user session
+    req.user = null;
+    req.session.destroy();
+
+    //~ Send an email to confirm updates
+    this.handleEmail(user.email, 'unsubscribe');
 
     return;
   };

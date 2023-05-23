@@ -28,6 +28,12 @@ class CoreModel {
             return null;
         return result;
     };
+    deleteOneItem = async (id) => {
+        const result = await this.data.delete(id);
+        if (!result)
+            return null;
+        return result;
+    };
 }
 export { CoreModel };
 //# sourceMappingURL=coreModel.js.map

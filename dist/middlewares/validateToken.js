@@ -1,19 +1,19 @@
 import jwt from 'jsonwebtoken';
+import { ErrorApi } from '../resources/services/errorHandling/errorHandler.js';
 import debug from 'debug';
 const logger = debug('Jwt');
-import { ErrorApi } from '../resources/services/errorHandling/errorHandler.js';
-const getRefreshToken = (req, res, next) => {
+const validateToken = (req, res, next) => {
     try {
         const authHeader = req.headers['authorization'];
         if (authHeader === undefined)
             throw new ErrorApi(req, res, 400, 'No token found !');
-        let refreshToken = authHeader.split(' ')[1];
-        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        const accessToken = authHeader.split(' ')[1];
+        jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) {
                 throw new ErrorApi(req, res, 403, 'The token is invalid!');
             }
-            req.session.refreshToken = [];
             req.user = user.user;
+            req.session.token = accessToken;
             next();
         });
     }
@@ -22,5 +22,5 @@ const getRefreshToken = (req, res, next) => {
             logger(err.message);
     }
 };
-export { getRefreshToken };
-//# sourceMappingURL=getRefreshToken.js.map
+export { validateToken };
+//# sourceMappingURL=validateToken.js.map

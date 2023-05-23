@@ -4,7 +4,7 @@
 @accessToken = Authorization: Bearer 
 
 
-@refreshToken = Authorization: Bearer 
+@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2LCJ1c2VybmFtZSI6Ill1bWlpIiwiZW1haWwiOiJ0ZXN0QHl1bWljb2RlLm5ldCIsInJvbGUiOiJ1c2VyIn0sImlhdCI6MTY4NDgyODA3NCwiZXhwIjoxNjg1MDAwODc0fQ.s-4YX5tGUPjQGbnhL9Hq-xIfrR4OdyFsJBe83E6nkbU
 
 
 #& -----------------------------------------------
@@ -17,8 +17,8 @@ POST {{entryPoint}}/signup
 Content-Type: application/json
 
 {
-    "username": "Yumicode",
-    "email": "helene.dyn.nguyen@gmail.com",
+    "username": "Yumii",
+    "email": "test@yumicode.net",
     "password": "N6y$Ozddzt=1aa",
     "passwordConfirm": "N6y$Ozddzt=1aa"
 }
@@ -29,7 +29,7 @@ POST {{entryPoint}}/signin
 Content-Type: application/json
 
 {
-  "email": "yumelio.message@gmail.com",
+  "email": "test@yumicode.net",
   "password": "N6y$Ozddzt=1aa"
 }
 
@@ -66,7 +66,7 @@ Content-Type: application/json
 
 #^ ------------------------ deleteUser
 ###
-DELETE {{entryPoint}}/users/11
+DELETE {{entryPoint}}/users/2
 Content-Type: application/json
 {{accessToken}}
 

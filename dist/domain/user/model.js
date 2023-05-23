@@ -38,6 +38,16 @@ class UserModel extends CoreModel {
         this.handleEmail(user.email, 'updated');
         return;
     };
+    controlDeletedUserDetails = async (req, res, userId) => {
+        const user = await this.findOneItem(userId);
+        if (req.user?.role === 'admin' || req.user?.id !== userId)
+            throw new ErrorApi(req, res, 403, this.badRequestMsg);
+        await this.deleteOneItem(user.id);
+        req.user = null;
+        req.session.destroy();
+        this.handleEmail(user.email, 'unsubscribe');
+        return;
+    };
     controlAllUsersRemovePwd = async () => {
         const users = await this.findAllItems();
         for (const user of users) {

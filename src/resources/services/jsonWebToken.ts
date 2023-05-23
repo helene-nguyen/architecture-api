@@ -3,11 +3,11 @@ import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 
 //~  Jwt Access_Token
-function generateAccessToken(user: Object) {
+const generateAccessToken = (user: Object) => {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '1d' }); // 1d => one day, 60m => 60 minutes
 }
 
-function generateRefreshToken(user: Object, req: Request) {
+const generateRefreshToken = (user: Object, req: Request) => {
   //* -- register refresh tokens
   req.session.refreshToken = [];
   const token = req.session.refreshToken;
@@ -20,7 +20,7 @@ function generateRefreshToken(user: Object, req: Request) {
 }
 
 //~  Jwt Refresh_Token
-function refreshToken(req: Request, res: Response) {
+const refreshToken = (req: Request, res: Response) => {
   if (req.session.refreshToken?.length === 0) {
     const user = req.user;
 

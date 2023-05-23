@@ -25,7 +25,17 @@ class UserController extends CoreController {
                 logger(err.message);
         }
     };
-    doSignOut = async (req, res) => { };
+    doSignOut = async (req, res) => {
+        try {
+            req.user = null;
+            req.session.destroy();
+            return res.status(204).json({ state: `User disconnected !` });
+        }
+        catch (err) {
+            if (err instanceof Error)
+                logger(err.message);
+        }
+    };
     fetchAllUsers = async (req, res) => {
         try {
             const users = await User.controlAllUsersRemovePwd();
@@ -58,7 +68,17 @@ class UserController extends CoreController {
                 logger(err.message);
         }
     };
-    deleteUser = async (req, res) => { };
+    deleteUser = async (req, res) => {
+        try {
+            const id = +req.params[this.paramsId];
+            await User.controlDeletedUserDetails(req, res, id);
+            return res.status(200).json({ state: this.deleteSuccessful });
+        }
+        catch (err) {
+            if (err instanceof Error)
+                logger(err.message);
+        }
+    };
 }
 const user = new UserController();
 export { user };

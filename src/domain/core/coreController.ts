@@ -9,6 +9,7 @@ interface CoreController {
     findOneItem: Function;
     createOneItem: Function;
     updateOneItem: Function;
+    deleteOneItem: Function;
   };
 
   paramsId: string;
@@ -17,6 +18,7 @@ interface CoreController {
 class CoreController {
   createSuccessful: string = `Successfully created!`;
   updateSuccessful: string = 'Informations successfully updated!';
+  deleteSuccessful: string = 'Informations successfully deleted!';
 
   //& Create
   create = async (req: Request, res: Response) => {
@@ -67,7 +69,17 @@ class CoreController {
   };
 
   //& Delete
-  delete = async (id: number | undefined) => {};
+  delete = async (req: Request, res: Response) => {
+    try {
+      const id = +req.params[this.paramsId];
+      await this.model.deleteOneItem(id);
+
+      //~ Result
+      return res.status(200).json(this.deleteSuccessful);
+    } catch (err) {
+      if (err instanceof Error) logger(err.message);
+    }
+  };
 }
 
 export { CoreController };

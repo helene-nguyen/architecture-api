@@ -8,6 +8,7 @@ interface CoreModel {
     selectAll: Function;
     selectOne: Function;
     update: Function;
+    delete: Function;
   };
 }
 class CoreModel {
@@ -41,6 +42,13 @@ class CoreModel {
 
   updateOneItem = async (bodyData: Object) => {
     const result = await this.data.update(bodyData);
+    if (!result) return null;
+
+    return result;
+  }
+
+  deleteOneItem = async (id: number) => { 
+    const result = await this.data.delete(id);
     if (!result) return null;
 
     return result;
