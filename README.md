@@ -1,7 +1,10 @@
-# Yumedo create Template
+# Yumedo Template
 
 ![banner](./__docs__/media/banner.png)
 
+## Authors: [Yumi](https://github.com/helene-nguyen) & [Fredo](https://github.com/Megafredo)
+
+---
 ## Introduction
 
 This repository contains a starter template for user authentication and CRUD operations.
