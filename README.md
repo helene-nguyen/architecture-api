@@ -1,4 +1,6 @@
-# Yumedo create Express Template
+# Yumedo create Template
+
+![banner](./__docs__/media/banner.png)
 
 ## Introduction
 
@@ -12,12 +14,21 @@ Hope it can help :)
 - [Tools and version](#tools-and-versions)
 - [Folder structure](#folder-structure)
 - [Makefile usage](#makefile-usage)
-- [Project :](#project)
 - [Some tips](#tips)
 
 - [Sources](#sources)
 
 ## Requirements
+
+Having NodeJS installed.
+
+Install all dependencies:
+
+```sh
+npm i
+```
+
+Don't forget to add .env file. You'll find an example.
 
 ## Tools and versions
 
@@ -31,6 +42,7 @@ Hope it can help :)
   - VSCodium v1.77.3
 
 - NodeJS v20.0.0
+- Typescript v5.0.4
 
 - Dependencies
 
@@ -88,16 +100,18 @@ npm init @eslint/config
 
 This will ask you a series of questions
 
-    How would you like to use ESLint? · To check syntax and find problems
-    √ What type of modules does your project use? · JavaScript modules (import/export)
-    √ Which framework does your project use? · None of these
-    √ Does your project use TypeScript? · Yes
-    √ Where does your code run? · node
-    √ What format do you want your config file to be in? · JavaScript
+```txt
+How would you like to use ESLint? · To check syntax and find problems
+√ What type of modules does your project use? · JavaScript modules (import/export)
+√ Which framework does your project use? · None of these
+√ Does your project use TypeScript? · Yes
+√ Where does your code run? · node
+√ What format do you want your config file to be in? · JavaScript
+```
 
 And it will install dependencies to use it :
 
-```
+```txt
 The config that you've selected requires the following dependencies:
 
 @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest
@@ -166,33 +180,47 @@ This is a configuration file for the TypeScript compiler (tsconfig.json) that sp
 ## Folder structure
 
 ```sh
-├── logs
+├── src
+|  ├── config
+|  |  ├── database
+|  |  |  └── connect.ts
+|  |  └── options
+|  |     ├── cors.ts
+|  |     └── session.ts
+|  ├── domain
+|  |  ├── core
+|  |  |  ├── coreController.ts
+|  |  |  ├── coreDatamapper.ts
+|  |  |  ├── coreModel.ts
+|  |  |  └── coreRouter.ts
+|  |  ├── main
+|  |  |  ├── controller.ts
+|  |  |  ├── datamapper.ts
+|  |  |  ├── model.ts
+|  |  |  ├── router.ts
+|  |  |  ├── schema.ts
+|  |  |  └── Types.ts
+|  |  └── user
+|  |     ├── controller.ts
+|  |     ├── datamapper.ts
+|  |     ├── model.ts
+|  |     ├── router.ts
+|  |     ├── schema.ts
+|  |     └── Types.ts
+|  ├── index.ts
+|  ├── middlewares
+|     ├── dataMailerTypes.ts
+|     ├── express
+|     |  └── index.d.ts
+|     └── userTypes.ts
+├── scripts
+|  ├── create.sh
+|  └── delete.sh
 ├── Makefile
 ├── package.json
 ├── README.md
 ├── restClient.http
-├── scripts
-|  ├── create.sh
-|  └── delete.sh
-├── src
-|  ├── config
-|  |  ├── database
-|  |  └── options
-|  ├── domain
-|  |  ├── article
-|  |  ├── category
-|  |  ├── core
-|  |  ├── main
-|  |  └── user
-|  ├── index.ts
-|  ├── middlewares
-|  ├── resources
-|  |  ├── services
-|  |  ├── swaggerDocs
-|  |  └── utils
-|  └── Types
-|     └── express
-└── tsconfig.json
+├── tsconfig.json
 ```
 
 ## Makefile Usage
@@ -244,10 +272,6 @@ db_revert
 ```sh
 db_verify
 ```
-
-## Project
-
-###
 
 ## Tips
 
