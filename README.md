@@ -5,9 +5,14 @@
 ## Authors: [Yumi](https://github.com/helene-nguyen) & [Fredo](https://github.com/Megafredo)
 
 ---
+
 ## Introduction
 
 This repository contains a starter template for user authentication and CRUD operations.
+
+This API was inspired by some concepts from the hexagonal architecture work of Dr. [Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/) in an article he wrote in 2005.
+
+Ports & Adapters is a pattern that promotes decoupling from technology and frameworks.
 
 Hope it can help :)
 
