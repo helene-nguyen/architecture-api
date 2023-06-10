@@ -14,8 +14,6 @@ This API was inspired by some concepts from the hexagonal architecture work of D
 
 Ports & Adapters is a pattern that promotes decoupling from technology and frameworks.
 
-Hope it can help :)
-
 ## Summary
 
 - [Requirements](#requirements)
@@ -54,10 +52,6 @@ Don't forget to add .env file. You'll find an example.
 
 - Dependencies
 
-```sh
-npm i ajv bcrypt dotenv express-session helmet jsonwebtoken nodemailer pg swagger-jsdoc swagger-ui-express debug
-```
-
 ```json
 "dependencies": {
     "ajv": "^8.12.0",
@@ -75,10 +69,6 @@ npm i ajv bcrypt dotenv express-session helmet jsonwebtoken nodemailer pg swagge
 ```
 
 - Dev dependencies
-
-```sh
-npm i -D @faker-js/faker @types/bcrypt @types/debug @types/express @types/express-session @types/jsonwebtoken @types/nodemailer @types/pg @types/supertest @types/swagger-jsdoc @types/swagger-ui-express @typescript-eslint/eslint-plugin @typescript-eslint/parser concurrently eslint typescript
-```
 
 ```json
   "devDependencies": {
@@ -100,43 +90,7 @@ npm i -D @faker-js/faker @types/bcrypt @types/debug @types/express @types/expres
   }
 ```
 
-- Configure EsLint
-
-```sh
-npm init @eslint/config
-```
-
-This will ask you a series of questions
-
-```txt
-How would you like to use ESLint? · To check syntax and find problems
-√ What type of modules does your project use? · JavaScript modules (import/export)
-√ Which framework does your project use? · None of these
-√ Does your project use TypeScript? · Yes
-√ Where does your code run? · node
-√ What format do you want your config file to be in? · JavaScript
-```
-
-And it will install dependencies to use it :
-
-```txt
-The config that you've selected requires the following dependencies:
-
-@typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest
-√ Would you like to install them now? · No / Yes
-√ Which package manager do you want to use? · npm
-Installing @typescript-eslint/eslint-plugin@latest, @typescript-eslint/parser@latest
-
-added 12 packages, and audited 644 packages in 3s
-
-69 packages are looking for funding
-  run `npm fund` for details
-
-found 0 vulnerabilities
-Successfully created .eslintrc.js file in C:\Users\Gamer\Desktop\api-yumelio
-```
-
-Add Typescript configuration file:
+- Typescript configuration file:
 
 ```json
 {
@@ -236,11 +190,11 @@ This is a configuration file for the TypeScript compiler (tsconfig.json) that sp
 ### Use for domains
 
 ```sh
-create_domain
+make create_domain
 ```
 
 ```sh
-delete_domain
+make delete_domain
 ```
 
 ### Use of Yumecho (database versioning)
@@ -248,37 +202,37 @@ delete_domain
 - Initialized a new database
 
 ```sh
-db_init
+make db_init
 ```
 
 - Add a new version
 
 ```sh
-db_add
+make db_add
 ```
 
 - Remove a version
 
 ```sh
-db_remove
+make db_remove
 ```
 
 - Deploy a version
 
 ```sh
-db_deploy
+make db_deploy
 ```
 
 - Revert the action of a specific version
 
 ```sh
-db_revert
+make db_revert
 ```
 
 - Check if the version is well deployed
 
 ```sh
-db_verify
+make db_verify
 ```
 
 ## Tips
