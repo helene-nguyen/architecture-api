@@ -2,7 +2,7 @@ import debug from 'debug';
 const logger = debug('Model');
 import { CoreModel } from '../core/coreModel.js';
 import { ErrorApi } from '../../resources/services/errorHandling/errorHandler.js';
-import { UserData } from './datamapper.js';
+import { UserData } from './repository.js';
 import { sendEmail } from '../../resources/services/nodemailer/nodemailerAuto.js';
 import { generateAccessToken, generateRefreshToken } from '../../resources/services/jsonWebToken.js';
 import bcrypt from 'bcrypt';
@@ -96,6 +96,10 @@ class UserModel extends CoreModel {
     };
     handleEmail = (email, context) => {
         return sendEmail.toUser(email, context);
+    };
+    allArticles = async () => {
+        const articles = await this.data.mongoData.selectAll();
+        return articles;
     };
 }
 const User = new UserModel();

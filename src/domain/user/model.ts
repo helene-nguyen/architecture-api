@@ -4,7 +4,7 @@ import debug from 'debug';
 const logger = debug('Model');
 import { CoreModel } from '../core/coreModel.js';
 import { ErrorApi } from '../../resources/services/errorHandling/errorHandler.js';
-import { UserData } from './datamapper.js';
+import { UserData } from './repository.js';
 import { sendEmail } from '../../resources/services/nodemailer/nodemailerAuto.js';
 import { generateAccessToken, generateRefreshToken } from '../../resources/services/jsonWebToken.js';
 //~ Security
@@ -27,6 +27,7 @@ interface IUserExist {
 class UserModel extends CoreModel {
   //& Properties
   data = UserData;
+  
   passwordErrorMsg: string = `Not the same password.`;
   userExist: string = `Username or email already exists.`;
   userNotExist: string = `Username or email doesn't exist. Create an account to connect.`;
@@ -167,6 +168,12 @@ class UserModel extends CoreModel {
 
   handleEmail = (email: string, context: string) => {
     return sendEmail.toUser(email, context);
+  };
+
+  allArticles = async () => {
+    const articles = await this.data.mongoData.selectAll();
+    
+    return articles;
   };
 }
 

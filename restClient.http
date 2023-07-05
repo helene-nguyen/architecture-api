@@ -1,7 +1,7 @@
 @hostname = localhost
 @entryPoint = http://{{hostname}}:4200/api/v1
 
-@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6Ill1bWkiLCJlbWFpbCI6ImNvbnRhY3RAeXVtaWNvZGUubmV0Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY4NDgzNTcyOCwiZXhwIjoxNjg0OTIyMTI4fQ.2RXiEVdcWZdII1wF32wHJAC_g0m781fQU2WqzYTZ9Nw
+@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6Ill1bWkiLCJlbWFpbCI6ImNvbnRhY3RAeXVtaWNvZGUubmV0Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY4ODU3Mzk0OCwiZXhwIjoxNjg4NjYwMzQ4fQ.tpu5V1qnL3o9MHPouzhczvGh0A_xTaTX5mL08AfK_Jo
 
 
 @refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6Ill1bWkiLCJlbWFpbCI6ImNvbnRhY3RAeXVtaWNvZGUubmV0Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY4NDgzNTcyOCwiZXhwIjoxNjg1MDA4NTI4fQ.Oxvmt_Uy5V_4nqsnr4f3AK10PywO8Q57cOsFijIvqmc
@@ -43,6 +43,12 @@ Content-Type: application/json
 #^ ------------------------ fetchAllUsers
 ###
 GET {{entryPoint}}/users
+Content-Type: application/json
+{{accessToken}}
+
+#^ ------------------------ fetchAllArticlesMongo
+###
+GET {{entryPoint}}/articlesmongo
 Content-Type: application/json
 {{accessToken}}
 

@@ -111,33 +111,6 @@ Don't forget to add .env file. You'll find an example.
 }
 ```
 
-This is a configuration file for the TypeScript compiler (tsconfig.json) that specifies options for compiling TypeScript code into JavaScript. Here's what each option means:
-
-- "compilerOptions": An object that specifies the compiler options.
-
-- "module": "ES2022": Specifies the module system to use. In this case, it's ECMAScript 2022.
-
-- "esModuleInterop": true: Enables interoperability between CommonJS and ES6 modules.
-
-- "target": "ES2022": Specifies the version of ECMAScript that the compiled JavaScript code should be compatible with. In this case, it's ECMAScript 2022.
-
-- "moduleResolution": "node": Specifies how modules should be resolved. In this case, it's Node.js style resolution.
-
-- "sourceMap": true: Generates source maps that allow debugging of the TypeScript code in the browser or IDE.
-
-- "outDir": "dist": Specifies the output directory where the compiled JavaScript files should be saved.
-
-- "strict": true: Enables strict type-checking and other strict checks.
-
-- "strictNullChecks": true: Enables strict null checks that ensure variables are not undefined or null.
-
-- "removeComments": true: Removes all comments from the compiled JavaScript files.
-
-- "resolveJsonModule": true: Enables importing JSON files as modules.
-
-- "lib": ["es2015"]: Specifies the set of built-in JavaScript libraries that should be included in the compilation process. In this case, it's ECMAScript 2015 (ES6).
-
-- "compileOnSave": true: Enables automatic compilation of TypeScript files when they are saved.
 
 ## Folder structure
 

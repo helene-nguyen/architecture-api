@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "module": "esnext",
+      "module": "ES6",
       "esModuleInterop": true,
       "target": "ES2022",
       "moduleResolution": "node",
@@ -9,7 +9,8 @@
       "strict": true,
       "strictNullChecks": true,
       "removeComments": true,
-      "resolveJsonModule": true
+      "resolveJsonModule": true,
+      "strictPropertyInitialization": false
     },
     "lib": [
       "es2015"

@@ -87,6 +87,16 @@ class UserController extends CoreController {
       if (err instanceof Error) logger(err.message);
     }
   };
+
+  fetchAllArticles = async (req: Request, res: Response) => {
+    try {
+      const articles = await User.allArticles();
+      //~ Result
+      return res.status(200).json(articles);
+    } catch (err) {
+      if (err instanceof Error) logger(err.message);
+    }
+  };
 }
 
 const user = new UserController();

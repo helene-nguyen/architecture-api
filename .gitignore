@@ -43,3 +43,6 @@ sqitch.conf
   
 #test
 coverage/
+
+#compiling
+dist/

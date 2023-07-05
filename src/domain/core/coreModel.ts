@@ -1,6 +1,5 @@
 //~ Import modules
-import { Request, Response } from 'express';
-import { ErrorApi } from '../../resources/services/errorHandling/errorHandler.js';
+import { CoreRepository } from "./coreRepository";
 
 interface CoreModel {
   data: {
@@ -12,6 +11,7 @@ interface CoreModel {
   };
 }
 class CoreModel {
+  
   notFoundMsg: string = 'Item not found!';
   notValidMsg: string = 'Given informations not valid.';
   forbiddenMsg: string = 'Given informations not allows any modification.';
@@ -27,6 +27,7 @@ class CoreModel {
 
   findAllItems = async () => {
     const result = await this.data.selectAll();
+    
     if (!result) return null;
 
     return result;
