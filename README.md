@@ -1,8 +1,4 @@
-# Yumedo Template
-
-![banner](./__docs__/media/banner.png)
-
-## Authors: [Yumi](https://github.com/helene-nguyen) & [Fredo](https://github.com/Megafredo)
+# Architecture API - Clean architecture
 
 ---
 
