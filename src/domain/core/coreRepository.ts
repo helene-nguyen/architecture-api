@@ -1,13 +1,8 @@
-interface IDataRepository {
-  insert: Function;
-  selectAll: Function;
-  selectOne: Function;
-  update: Function;
-  delete: Function;
-}
+//~ Import modules
+import { ICoreRepository, IData } from "./Types";
 
-class CoreRepository {
-  dataRepository: IDataRepository;
+class CoreRepository implements ICoreRepository {
+  dataRepository: IData;
 
   //& Create
   insert = async (inputData: object) => {

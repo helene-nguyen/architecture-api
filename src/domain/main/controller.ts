@@ -1,7 +1,7 @@
 //~ Import modules
+import { Request, Response } from 'express';
 import debug from 'debug';
 const logger = debug('Controller');
-import { Request, Response } from 'express';
 
 const renderHomePage = (req: Request, res: Response) => {
   try {

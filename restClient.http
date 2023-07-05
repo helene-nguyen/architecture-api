@@ -46,9 +46,9 @@ GET {{entryPoint}}/users
 Content-Type: application/json
 {{accessToken}}
 
-#^ ------------------------ fetchAllArticlesMongo
+#^ ------------------------ fetchAllUsersMongo
 ###
-GET {{entryPoint}}/articlesmongo
+GET {{entryPoint}}/usersmongo
 Content-Type: application/json
 {{accessToken}}
 

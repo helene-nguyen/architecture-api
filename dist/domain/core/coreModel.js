@@ -1,4 +1,5 @@
 class CoreModel {
+    data;
     notFoundMsg = 'Item not found!';
     notValidMsg = 'Given informations not valid.';
     forbiddenMsg = 'Given informations not allows any modification.';

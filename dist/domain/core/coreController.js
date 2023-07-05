@@ -1,6 +1,8 @@
 import debug from 'debug';
 const logger = debug('Controller');
 class CoreController {
+    model;
+    paramsId;
     createSuccessful = `Successfully created!`;
     updateSuccessful = 'Informations successfully updated!';
     deleteSuccessful = 'Informations successfully deleted!';

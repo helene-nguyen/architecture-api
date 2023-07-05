@@ -1,21 +1,12 @@
 //~ Import modules
 import { Request, Response } from 'express';
 import debug from 'debug';
+import { ICoreController, IModel } from './Types';
 const logger = debug('Controller');
 
-interface CoreController {
-  model: {
-    findAllItems: Function;
-    findOneItem: Function;
-    createOneItem: Function;
-    updateOneItem: Function;
-    deleteOneItem: Function;
-  };
-
+class CoreController implements ICoreController {
+  model: IModel;
   paramsId: string;
-}
-
-class CoreController {
   createSuccessful: string = `Successfully created!`;
   updateSuccessful: string = 'Informations successfully updated!';
   deleteSuccessful: string = 'Informations successfully deleted!';

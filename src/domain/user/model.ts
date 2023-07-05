@@ -1,33 +1,17 @@
 //~ Import modules
 import { Request, Response } from 'express';
-import debug from 'debug';
-const logger = debug('Model');
 import { CoreModel } from '../core/coreModel.js';
-import { ErrorApi } from '../../resources/services/errorHandling/errorHandler.js';
 import { UserData } from './repository.js';
+import { IBodyData, IUserData, IUserExist } from './Types.js';
 import { sendEmail } from '../../resources/services/nodemailer/nodemailerAuto.js';
-import { generateAccessToken, generateRefreshToken } from '../../resources/services/jsonWebToken.js';
+import { ErrorApi } from '../../resources/services/errorHandling/errorHandler.js';
 //~ Security
+import { generateAccessToken, generateRefreshToken } from '../../resources/services/jsonWebToken.js';
 import bcrypt from 'bcrypt';
-
-interface IBodyData {
-  username: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-}
-
-interface IUserData {
-  [key: string]: string;
-}
-
-interface IUserExist {
-  password: string;
-}
 class UserModel extends CoreModel {
   //& Properties
   data = UserData;
-  
+
   passwordErrorMsg: string = `Not the same password.`;
   userExist: string = `Username or email already exists.`;
   userNotExist: string = `Username or email doesn't exist. Create an account to connect.`;
@@ -170,10 +154,10 @@ class UserModel extends CoreModel {
     return sendEmail.toUser(email, context);
   };
 
-  allArticles = async () => {
-    const articles = await this.data.mongoData.selectAll();
-    
-    return articles;
+  allUsers = async () => {
+    const users = await this.data.mongoData.selectAll();
+
+    return users;
   };
 }
 

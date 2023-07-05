@@ -1,4 +1,4 @@
-//~import modules
+//~ Import modules
 import { ObjectId, MongoClient } from 'mongodb';
 
 class MongoCoreDataMapper {

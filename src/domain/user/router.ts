@@ -16,14 +16,14 @@ router.post('/api/v1/signup', validate(userSchema), user.doSignUp);
 router.post('/api/v1/signin', user.doSignIn);
 router.get('/api/v1/signout', [getRefreshToken], user.doSignOut);
 
-router.get('/api/v1/articlesmongo', user.fetchAllArticles);
-
 router.get('/api/v1/users', [validateToken, auth, admin], user.fetchAllUsers);
 router.get('/api/v1/users/:userId(\\d+)', [validateToken, auth], user.fetchOneUser);
 router.patch('/api/v1/users/:userId(\\d+)', validate(userUpdateSchema), [validateToken, auth], user.updateUser);
 router.delete('/api/v1/users/:userId(\\d+)', [validateToken, auth], user.deleteUser);
 
 router.post('/api/v1/refreshToken', [getRefreshToken], refreshToken);
+
+router.get('/api/v1/usersmongo', user.fetchAllUsersMongo);
 
 //~ Export router
 export { router };

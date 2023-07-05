@@ -10,6 +10,7 @@
     "dev:run": "nodemon dist/index.js",
     "dev:lint": "eslint . --ext .ts",
     "dev": "concurrently \"npm:dev:*\" -c green.bold,yellow.bold,blue.bold",
+    "prod": "concurrently \"npm:dev:build\" \"npm:start\" -c green.bold,yellow.bold",
     "test": ""
   },
   "keywords": [
