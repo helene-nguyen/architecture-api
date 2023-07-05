@@ -45,4 +45,4 @@ sqitch.conf
 coverage/
 
 #compiling
-dist/
+dist
