@@ -107,7 +107,6 @@ Don't forget to add .env file. You'll find an example.
 }
 ```
 
-
 ## Folder structure
 
 ```sh
