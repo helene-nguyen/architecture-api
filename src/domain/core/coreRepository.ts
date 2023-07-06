@@ -30,7 +30,7 @@ class CoreRepository implements ICoreRepository {
 
   //& Delete
   delete = async (id: number) => {
-    const result = await this.dataRepository.selectOne(id);
+    const result = await this.dataRepository.delete(id);
     return result;
   };
 }
