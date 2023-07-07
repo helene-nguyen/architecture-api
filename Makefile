@@ -23,4 +23,4 @@ db_revert:
 	sh ./data/yumecho/revert.sh 
 
 db_verify:
-	sh ./data/yumecho/verify.sh 
+	sh ./data/yumecho/verify.sh

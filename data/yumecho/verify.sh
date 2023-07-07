@@ -11,7 +11,7 @@ find_file() {
 verify_version() {
     for file in "./data/migrations/verify/*.sql"; do
 
-        if [[ "${OS_NAME,,}" =~ (w*) ]]; then
+        if [[ "${OS_NAME,,}" =~ ("w") ]]; then
             psql \
                 -U ${PGUSER} \
                 -d ${PGDATABASE} \
@@ -20,7 +20,7 @@ verify_version() {
                 -W \
                 -f $(find $file -maxdepth 1 -name "v${VERSION_NUMBER}*")
                 
-        elif [[ "${OS_NAME,,}" =~ (l*) ]]; then
+        elif [[ "${OS_NAME,,}" =~ ("l") ]]; then
             sudo -iu postgres \
                 psql \
                 -U ${PGUSER} \
