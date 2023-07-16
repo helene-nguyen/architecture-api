@@ -13,7 +13,7 @@ CREATE DOMAIN EMAIL AS TEXT CHECK (
 -- Minimum 8 characters - at least 1 number, one min, one maj, un one special character min
 
 CREATE DOMAIN PWD AS TEXT CHECK (
-    VALUE ~ '^(?#password)(?=.*[0-9])(?=.*[-a-z])(?=.*[-A-Z]).{8,}$'
+    VALUE ~ '^(?#password)(?=.*[0-9])(?=.*[-a-z])(?=.*[-A-Z])(?=.*[^a-zA-Z0-9]).{8,}$'
 );
 
 --& Check links
