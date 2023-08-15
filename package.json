@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "express-api-template",
+  "name": "architecture-api-template",
   "version": "1.0.0",
   "description": "Template creating API, simplify our lives...",
   "main": "dist/index.js",

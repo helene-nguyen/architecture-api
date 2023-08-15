@@ -18,7 +18,7 @@ const client = new MongoClient(url);
 client
   .connect()
   .then(() => logger('\x1b[1;36m🌿 Mongo DB connected\x1b[0m'))
-  .catch((err) => logger('\x1b[1;31mMongo DB connection failed\x1b[0m', err));
+  .catch((err) => logger('\x1b[1;31m🧨 Mongo DB connection failed\x1b[0m', err));
 
 // await listDatabases(client);
 
