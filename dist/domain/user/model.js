@@ -25,7 +25,7 @@ class UserModel extends CoreModel {
             throw new ErrorApi(req, res, 401, this.notValidMsg);
         const { password: remove, ...user } = userExist;
         const { accessToken, refreshToken } = this.generatedTokens({ user }, req);
-        const userIdentity = { ...user, accessToken, refreshToken };
+        const userIdentity = { ...user, tokens: { accessToken, refreshToken } };
         return userIdentity;
     };
     controlUpdatedUserDetails = async (req, res, userId) => {

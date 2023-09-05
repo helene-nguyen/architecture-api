@@ -21,13 +21,14 @@
 # npm
 node_modules
 package-lock.json
+pnpm-lock.yaml
 *.gz
 
 #logs
 
-#**/*.logs
-#logs/
-#**/*.logs.*
+**/*.logs
+logs/
+**/*.logs.*
 
 
 #vscode
@@ -45,4 +46,4 @@ sqitch.conf
 coverage/
 
 #compiling
-dist
+dist/

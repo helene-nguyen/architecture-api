@@ -1,10 +1,10 @@
 @hostname = localhost
 @entryPoint = http://{{hostname}}:4200/api/v1
 
-@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6Ill1bWkiLCJlbWFpbCI6ImNvbnRhY3RAeXVtaWNvZGUubmV0Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY4ODU3Mzk0OCwiZXhwIjoxNjg4NjYwMzQ4fQ.tpu5V1qnL3o9MHPouzhczvGh0A_xTaTX5mL08AfK_Jo
+@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6Ill1bWkiLCJlbWFpbCI6ImNvbnRhY3RAeXVtaWNvZGUubmV0Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY5MzA1OTA3NSwiZXhwIjoxNjkzMTQ1NDc1fQ.7t2zF7mRqEf022e7nz8xmx3up475ejbwh14j9v_O8Mw
 
 
-@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6Ill1bWkiLCJlbWFpbCI6ImNvbnRhY3RAeXVtaWNvZGUubmV0Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY4NDgzNTcyOCwiZXhwIjoxNjg1MDA4NTI4fQ.Oxvmt_Uy5V_4nqsnr4f3AK10PywO8Q57cOsFijIvqmc
+@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6Ill1bWkiLCJlbWFpbCI6ImNvbnRhY3RAeXVtaWNvZGUubmV0Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY5MjUyMTk1NSwiZXhwIjoxNjkyNjk0NzU1fQ.kSfpYpubqaKUzUL1OMsHw2gn2dVqSMiXjI_pDkIEw-c
 
 
 #& -----------------------------------------------

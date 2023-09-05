@@ -15,11 +15,11 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
     //header contains token "Bearer <token>", split the string and get the 2nd part of the array
     const accessToken = authHeader.split(' ')[1];
 
-    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET!, (err: unknown, user: any) => {
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET!, (err: unknown, { user }: any) => {
       if (err) {
         throw new ErrorApi(req, res, 403, 'The token is invalid!');
       }
-      req.user = user.user;
+      req.user = user;
 
       req.session.token = accessToken;
 

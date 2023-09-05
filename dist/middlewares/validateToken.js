@@ -8,11 +8,11 @@ const validateToken = (req, res, next) => {
         if (authHeader === undefined)
             throw new ErrorApi(req, res, 400, 'No token found !');
         const accessToken = authHeader.split(' ')[1];
-        jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, { user }) => {
             if (err) {
                 throw new ErrorApi(req, res, 403, 'The token is invalid!');
             }
-            req.user = user.user;
+            req.user = user;
             req.session.token = accessToken;
             next();
         });

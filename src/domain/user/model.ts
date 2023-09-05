@@ -46,7 +46,7 @@ class UserModel extends CoreModel {
     // The ! non-null assertion operator is used to tell TypeScript that userExist is guaranteed to be non-null at this point, so the destructuring assignment will work correctly
     const { accessToken, refreshToken } = this.generatedTokens({ user }, req);
 
-    const userIdentity = { ...user, accessToken, refreshToken };
+    const userIdentity = { ...user, tokens: { accessToken, refreshToken } };
 
     return userIdentity;
   };
@@ -108,7 +108,6 @@ class UserModel extends CoreModel {
 
   controlUserDetails = async (req: Request, res: Response) => {
     let { username, email, password, passwordConfirm }: IBodyData = req.body;
-
     //~ Email already exist ?
     const userExist = await this.checkUser(username, email);
     if (userExist) throw new ErrorApi(req, res, 401, this.userExist);
