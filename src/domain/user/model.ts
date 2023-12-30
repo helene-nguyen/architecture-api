@@ -38,7 +38,7 @@ class UserModel extends CoreModel {
     if (!userExist) throw new ErrorApi(req, res, 401, this.userNotExist);
 
     //~ Security
-    const passwordValid = this.isPasswordValid(userExist, password);
+    const passwordValid = await this.isPasswordValid(userExist, password);
     if (!passwordValid) throw new ErrorApi(req, res, 401, this.notValidMsg);
 
     const { password: remove, ...user } = userExist!;
